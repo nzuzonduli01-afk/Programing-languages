@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Programming Languages | Learn & Explore</title>
-  <style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Programming Languages | Learn & Explore</title>
+<style>
 
 * {
   margin: 0;
@@ -36,20 +36,20 @@ header {
   box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
-.container {
-  display: grid;
-  grid-template-columns: 300px 1fr;
-  grid-template-areas: "sidebar main";
-  gap: 1.5rem;
-  padding: 2rem;
-  padding-top: 35px;
-  max-width: 1300px;
-  margin: auto;
-}
-
 header h1 {
   font-size: 2rem;
   letter-spacing: 1px;
+}
+
+/* Hamburger for mobile */
+.hamburger {
+  display: none;
+  font-size: 2rem;
+  cursor: pointer;
+  user-select: none;
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
 }
 
 nav {
@@ -58,7 +58,7 @@ nav {
   align-items: center;
   gap: 1rem;
   margin-top: 0.5rem;
-  position: relative;
+  flex-wrap: wrap;
 }
 
 nav a {
@@ -73,17 +73,14 @@ nav a:hover {
   color: #fff;
 }
 
-
 .dropdown {
   position: relative;
   display: inline-block;
 }
 
-
 .dropbtn {
   cursor: pointer;
 }
-
 
 .dropdown-content {
   display: none;
@@ -98,7 +95,6 @@ nav a:hover {
   left: 0;
 }
 
-
 .dropdown-content a {
   color: #fff;
   padding: 0.75rem 1rem;
@@ -112,26 +108,33 @@ nav a:hover {
   color: #0d1b2a;
 }
 
-
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-
-
+.dropdown:hover .dropdown-content,
 .dropdown:focus-within .dropdown-content,
 .dropdown:active .dropdown-content {
   display: block;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  grid-template-areas: "sidebar main";
+  gap: 1.5rem;
+  padding: 2rem;
+  padding-top: 120px;
+  max-width: 1300px;
+  margin: auto;
 }
 
 aside {
   grid-area: sidebar;
   background-color: #1b263b;
   color: #fff;
-  padding:  1.5rem;
+  padding: 1.5rem;
   border-radius: 10px;
   position: sticky; 
   top: 150px; 
-  height: fit-content; 
+  height: fit-content;
+  min-height: 500px; 
 }
 
 aside h2 {
@@ -163,7 +166,7 @@ main {
   border-radius: 10px;
   padding: 1.5rem;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  margin-top: 120px;
+  margin-top: 40px;
 }
 
 main h2 {
@@ -186,56 +189,53 @@ footer {
 }
 
 @media (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+
   .container {
     display: flex;
     flex-direction: column;
     padding: 1rem;
   }
 
-@media (max-width: 768px) {
-  .container {
-    grid-template-columns: 1fr;
-  }
- }
-
-
-  nav {
-    flex-wrap: wrap;
-    gap: 0.5rem;
-  }
-
   aside {
-    position: relative;
-    top: 0;
-    width: 100%;
-    border-radius: 10px;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+    position: fixed;
+    top: 195px; 
+    left: 0;
+    width: 250px;
+    height: calc(100% - 195px); 
+    padding: 2rem;
+    z-index: 999;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
   }
 
+  aside.show {
+    transform: translateX(0);
+  }
+
+  
   main {
-    margin-top: 0;
+    margin-top: 195px; 
   }
 
   main img {
     max-height: 300px;
     object-fit: cover;
   }
-
-  header h1 {
-    font-size: 1.6rem;
-  }
 }
 
-  </style>
+
+</style>
 </head>
 <body>
 
-  <header >
-    <h1>Explore Programming Languages</h1>
+<header>
+  <h1>Explore Programming Languages</h1>
+  <span class="hamburger" onclick="toggleSidebar()">☰</span>
   <nav>
     <a href="#">About</a>
-
     <div class="dropdown">
       <a href="#" class="dropbtn">Languages</a>
       <div class="dropdown-content">
@@ -245,32 +245,30 @@ footer {
         <a href="#python-section">Python</a>
       </div>
     </div>
-
-   <div class="dropdown">
-    <a href="#" class="dropbtn">Tutorials</a>
-    <div class="dropdown-content">
-      <a href="https://www.w3schools.com/html/default.asp" target="_blank">HTML</a>
-      <a href="https://www.w3schools.com/css/default.asp" target="_blank">CSS</a>
-      <a href="https://www.w3schools.com/js/default.asp" target="_blank">JavaScript</a>
-      <a href="https://www.w3schools.com/python/default.asp" target="_blank">Python</a>
+    <div class="dropdown">
+      <a href="#" class="dropbtn">Tutorials</a>
+      <div class="dropdown-content">
+        <a href="https://www.w3schools.com/html/default.asp" target="_blank">HTML</a>
+        <a href="https://www.w3schools.com/css/default.asp" target="_blank">CSS</a>
+        <a href="https://www.w3schools.com/js/default.asp" target="_blank">JavaScript</a>
+        <a href="https://www.w3schools.com/python/default.asp" target="_blank">Python</a>
+      </div>
     </div>
-  </div>
-  
- 
   </nav>
-  </header>
+</header>
 
-  <div class="container">
-    <aside>
-      <h2>Languages Covered</h2>
-      <ul>
-        <li><a href="#">About</a></li>
-        <li><a href="#html-section">HTML</a></li>
-        <li><a href="#css-section">CSS</a></li>
-        <li><a href="#js-section">JavaScript</a></li>
-        <li><a href="#python-section">Python</a></li>
-      </ul>
-    </aside>
+<div class="container">
+  <aside id="sidebar">
+    <h2>Languages Covered</h2>
+    <ul>
+      <li><a href="#">About</a></li>
+      <li><a href="#html-section">HTML</a></li>
+      <li><a href="#css-section">CSS</a></li>
+      <li><a href="#js-section">JavaScript</a></li>
+      <li><a href="#python-section">Python</a></li>
+    </ul>
+  </aside>
+
 
     <main>
       <h1>About Programming Languages</h1>
@@ -398,6 +396,18 @@ footer {
     @LinkedIn: <a href="https://www.linkedin.com/in/nzuzo-nduli-351725245/" target="_blank">Nzuzo Nduli</a></p>
   </footer>
 
+<script>
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('show');
+}
+
+const sidebarLinks = document.querySelectorAll('#sidebar a');
+sidebarLinks.forEach(link => {
+  link.addEventListener('click', () => {
+    document.getElementById('sidebar').classList.remove('show');
+  });
+});
+</script>
+
 </body>
 </html>
-
